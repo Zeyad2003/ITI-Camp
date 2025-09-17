@@ -1,0 +1,4 @@
+1. Create this table in HTML & CSS and provide a way for sorting elements in js using objects and dynamic objects.
+2. Create a stack functionalities with js (using linkedlist) and make a front ui that show the demonstration.
+3. How to inherit a constructor function from another constructor function in ES5
+=> By setting up the prototype chain, and resetting the child's constructor. 

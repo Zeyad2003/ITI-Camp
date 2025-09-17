@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>imgmap</title>
+    <style>
+        body {
+            background-image: url(assets/nature.jpg);
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" 
+         usemap="#googlemap" 
+         alt="Google Logo">
+
+    <map name="googlemap">
+        <area shape="rect" coords="0,0,70,92" href="https://google.com" alt="Google" target="_blank">
+        
+        <area shape="rect" coords="70,0,160,92" href="https://w3schools.com" alt="W3Schools" target="_blank">
+    </map>
+
+</body>
+</html>

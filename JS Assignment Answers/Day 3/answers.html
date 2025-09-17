@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JS</title>
+        <script src="answers.js"></script>
+    </head>
+    <body>
+        <!-- BOM Assignment Answers -->
+        <button onclick="openWindowAndAutoClose()">Task 1: Open/Close Window</button>
+
+        <button onclick="showUserAgent()">Task 2: Show User Agent</button>
+
+        <button onclick="checkOnlineStatus()">Task 3: Online/Offline</button>
+
+        <button onclick="scheduleReloadIn5s()">Task 4: Reload in 5s</button>
+
+        <button onclick="logLocationDetails()">Task 5: Show Location</button>
+
+        <button onclick="showScreenSize()">Task 7: Show Screen Size</button>
+
+        <div id="screenInfo"></div>
+        <a id="linkToChange" href="#">Sample Link</a>
+
+        <button onclick="changeLinkAfter2s()">Task 8: Change Link in 2s</button>
+        <button onclick="cancelChangeLink()">Task 8: Cancel</button>
+
+        <button onclick="startTitleClock()">Task 9: Start Title Clock</button>
+        <button onclick="stopTitleClock()">Task 9: Stop</button>
+
+        <button onclick="askToContinue()">Task 10: Ask to Continue</button>
+
+        <br><br>
+
+        <!-- DOM Assignment Answers -->
+        <hr>
+
+        <h3>DOM Tasks</h3>
+
+        <ul id="sampleUl">
+            <li>Item 1</li>
+            <li id="li2">Item 2</li>
+            <li>Item 3</li>
+            <!-- comment text -->
+        </ul>
+
+        <div id="containerA">
+            <p>Paragraph</p>
+            <span>Span</span>
+        </div>
+
+        <form id="sampleForm">
+            <input type="text" name="firstName" value="Zeyad">
+            <input type="text" name="lastName" value="Nasef">
+        </form>
+
+    <button onclick="showUlChildNodesAndChildren()">Task 11: UL childNodes/children</button>
+
+    <button onclick="showBodyDirectChildren()">Task 12: Body direct children</button>
+
+    <button onclick="showElementNodesInUl('ul#sampleUl')">Task 13: Only element nodes in UL</button>
+
+    <button onclick="showFirstChildVsFirstElementChild('#containerA')">Task 14: firstChild vs firstElementChild</button>
+
+
+    <button onclick="showAllLiInUl('ul#sampleUl')">Task 15: All LI in UL</button>
+
+    <button onclick="showSiblingsOfElement('#li2')">Task 17: Siblings of #li2</button>
+
+    <button onclick="traverseUlChildren('ul#sampleUl')">Task 18: Traverse UL children</button>
+
+    <button onclick="countElementChildren('ul#sampleUl')">Task 19: Count element children</button>
+
+    <button onclick="showFormInputNamesAndValues()">Task 20: Form input names/values</button>
+
+    <button onclick="logAllFormNames()">Task 21: Log all form names</button>
+
+    <div>
+        <h4>Sample Images</h4>
+        <img src="assets/img.jpg" width="80px" height="80" alt="Small Image">
+        <img src="assets/img.jpg" width="120px" height="120" alt="Large Image">
+    </div>
+    <button onclick="logAllImageSrcs()">Task 22: Log all image srcs</button>
+
+    <button onclick="disableSampleFormInputs()">Task 23: Disable sample form inputs</button>
+
+    <button onclick="filterWideImages()">Task 24: Filter images width > 100px</button>
+
+    </body>
+</html>

@@ -1,0 +1,68 @@
+1. Select the first <div> on the page using getElementsByTagName and log its innerHTML.
+
+2. Using getElementById change the text of #my-p to "Hello DOM".
+
+3. Use querySelector to select the element with class "target-div" and log its nodeName.
+
+4. Use querySelectorAll to count how many <div> elements exist; log the count.
+
+5. Use getElementsByName on the email input (name="user-email") and set its value to "user@test.com".
+
+6. Check if the text input has a "name" attribute; if not add name="user-name" via setAttribute.
+
+7. Append the string " - UPDATED" to the existing innerText of #my-p (keep original text).
+
+8. Create Images slider that work automatically and with next/prev/start/stop buttons.
+
+9. Set the placeholder of the text input to "Type your full name" using setAttribute.
+
+10. Log whether the email input has attribute "required"; if missing add it.
+
+11. Write function getSelectedValue(selectId) returning the current selected option value.
+
+12. Loop through all options of the select and log each option's text and value.
+
+13. Programmatically select the option with value "EG".
+
+14. Create function selectByText(selectId, text) that selects the first option whose text matches exactly.
+
+15. Replace innerHTML of #div-2 with a <p><b>Bold Text</b></p> (ensure bold renders, not printed literally).
+
+16. Add classes class-a and class-b to #div-2 then remove class-b (using classList).
+
+17. Toggle class "hidden" on #div-2 twice; comment final visibility.
+
+18. Create function insertAfter(refNode, newNode) that inserts newNode immediately after refNode.
+
+19. Create a new <div> saying "Dynamic Box" with yellow background and append inside #div-2.
+
+20. Insert a new <p> BEFORE the first child of #div-2 (insertBefore).
+
+21. Insert a <span> with text "AFTER END" right after #div-2 using insertAdjacentHTML.
+
+22. Form onsubmit: prevent default and log values of text, email, and select inputs.
+
+23. Add input event on the text input that logs its length whenever it changes.
+
+24. Write validateEmailSimple(value) returning true if value contains both '@' and '.'; add 2 passing / 2 failing examples (comments).
+
+25. Create an element, append it to #div-2, then remove it using parent.removeChild(child).
+
+26. Create an element, append it to <div id="wrapper">
+  <p id="first">First</p>
+  <p id="second">Second</p>
+</div>
+
+27. Clone #div-2 , set clone id="div-2-clone", and insert it after original using insertAfter.
+
+28. Highlight all text & email inputs (green border) in a function highlightInputs(form) and call it on DOMContentLoaded.
+
+29. Build function buildCard(title, content) returning <div class="card"> with an <h3> and <p>; append two cards to body.
+
+30. Add delegated click listener on body logging when a .card is clicked.
+
+31. Reflection (comment): Which two tasks were most challenging and why?
+
+32. create and unordered list dynamically with at 10 items, the odd list items should have class "odd" and even items "even", -create the two classes in your CSS file-
+
+33. use 3 inputs (name, email, select_city) and a button (when clicked 3 divs with the representative data appear).

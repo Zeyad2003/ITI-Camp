@@ -1,0 +1,16 @@
+:root {
+  --hero-bg: linear-gradient(135deg, #f8f9fa 0%, #eef4ff 100%);
+}
+
+.hero-bg {
+  background: var(--hero-bg);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  transition: transform 150ms ease-in-out;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,53 @@
+
+
+JavaScript Assignment – Lecture 1 
+Instructions: Answer all questions. Write code where required and explain your answers clearly.
+
+
+
+Part 1: Variables and Scope
+
+1. Explain how var works in JavaScript. What is variable hoisting? Give a code example.
+
+2. What is the scope of a variable declared with var inside a function? What about inside a block (e.g., an if statement)?
+
+3. List all JavaScript primitive types in ES5. Give an example of each.
+
+4. What is the difference between a primitive type and an object type? Give an example where this difference is important.
+
+5. Create a number, string, and boolean using both literal and constructor syntax. Show the difference in their types using typeof.
+
+6. Why is it generally recommended to use literals instead of constructors for primitive types?
+
+7. Given the following code, what will be the output? Explain why.
+   var x = 123.4567;
+   console.log(x.toFixed(2));
+   console.log(x.toPrecision(4));
+8. What is NaN? How can you check if a value is NaN? Give an example.
+
+9. What is the difference between parseInt, parseFloat, and Number? Give an example for each.
+
+10. What is the difference between implicit and explicit type casting? Give an example of each.
+
+11. What will be the result and type of the following expressions? Explain your answer.
+	- true + 5
+	- "10" - 2
+	- 12 - "1a"
+	- 5 / 0
+	- 5 + undefined
+
+12. What will be logged to the console in the following code? Explain each step.
+	var a = "15.5";
+	var b = +a;
+	console.log(b, typeof b);
+
+13. What will be the output of:
+	var result = 20 > true < 5 == 1;
+	console.log(result);
+	Explain why.
+
+14. Write a function that takes a string and returns true if it can be converted to a valid number, and false otherwise.
+15. Write a program that prints all numbers from 1 to 20 using a while loop.
+16. Write a program that asks the user to enter numbers until they enter 0, using a do...while loop. After the loop ends, print the sum of all entered numbers (excluding 0).
+17. Write a program that takes a number from 1 to 7 and prints the corresponding day of the week using a switch statement. Use a for loop to test your program with all numbers from 1 to 7.
+

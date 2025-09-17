@@ -1,0 +1,94 @@
+
+1. Predict (in comments) the output order of this code, then run to verify.
+   console.log(a());
+   var b = function(){ return 'B'; };
+   function a(){ return 'A'; }
+   console.log(b());
+   After verifying, explain (one short line) why a works before definition and b does not.
+
+2. Rewrite a function declaration sum(a,b) into a function expression stored in a variable named add and confirm both produce same result for (3,4).
+
+3. Create a named function expression assigned to var factorial. Use the internal name ONLY for recursion. Log factorial(5). Show (comment) that the internal name is not global.
+
+4. Write a function showInfo that logs arguments.length and each argument. Call it with 0, then 2, then 5 arguments.
+
+5. Write a function mutate(x,y) that changes x and y inside and shows arguments[0] / arguments[1] before and after. Explain result in a comment.
+
+6. Implement sumAll() using only the arguments object (no arrays) to total all numeric arguments. Test sumAll(2,5,3) and sumAll().
+
+7.  Implement sumAll() using only the arguments object but with the Array method reduce.
+
+8. Write describeValue that returns different strings based on number of args: 0 -> 'none', 1 -> 'one:'+val, 2 -> 'two:'+a+','+b else 'too many'.
+
+9. Create an array funcs of three small anonymous functions that transform a number. Apply them in order to start = 10 (loop). Log final result.
+
+10. Write makeMultiplier(factor) returning a function(n) that multiplies. Create double and triple; test with 7.
+
+11. Implement once(fn) runs fn only first time, returns its return value. Test with a function that logs and returns a string.
+
+12. (Bonus) Modify once so subsequent calls return the FIRST result (like a memo of zero-arg function). Keep original version comment above for comparison.
+
+13. (Bonus) Implement makeCounter(start) that returns { inc: fn, dec: fn, value: fn }. State stays private. Demonstrate two independent counters.
+
+14. makeAdder(start) returns a function that adds its argument to internal total and returns current total each call. Demonstrate separate instances.
+
+15. Implement memoize1(fn). Show it caches slowSquare(9) twice (timing optional comment).
+
+16. (Bonus) Implement memoizeN(fn) that supports any number of primitive args by joining them with '|' as a key. Show with add3(a,b,c).
+
+17. Make object user with name and method sayHi logging 'Hi NAME'. Call sayHi, then assign var f = user.sayHi; call f(). Explain (comment) output difference.
+
+18. Re-use sayHi but call it with another object { name: 'Sara' } using two different ways.
+
+19. Create greeter.greet(greeting,sign). Use apply to invoke it on { name: 'Ali' } with 'Hello','!'.
+
+20. Bind greet to { name:'Lara' } as greetLara (no preset greeting). Call with different greetings.
+
+21. Bind greet to produce a sayHello(obj) that always uses greeting 'Hello' but variable sign(!,*,!!,<#).
+
+
+22. Use slice inside a function to convert its arguments(remember it is an array like) to a real array and log reversed copy without mutating original.
+
+23. Given arr = [5,2,11,7] find max WITHOUT loop using max(). Then show an alternative with a loop.
+
+24. Demonstrate calling Math.max with individual numbers using call and explain why apply is better.
+
+25. Convert string concatenation 'User: '+name+' Age: '+(age+1) into a template literal equivalent.
+
+26. Create a multi-line template with variables title and body and log it; show classical \n build version for contrast.
+
+27. Write a block with var i and let j inside if(true) and log both inside and outside. Comment which leaks.
+
+28. Write code that tries to log x before let x = 5;.
+
+29. Show that pushing to a const array works but reassigning it does not (comment error you would get if attempted—do not actually break execution).
+
+30. Rewrite a normal function square(n) { return n*n; } as arrow in three forms: full body, concise, inline in map over [1,2,3].
+
+31. Create object timer with count:0 and method startClassic using setInterval(function(){...}) and startArrow using setInterval(()=>{...}). Show difference in how this works (stop after a few increments using clearInterval).
+
+32. Write an arrow function that returns an object {v:10}. Show the need for parentheses.
+
+33. Give one example where arrow is a bad choice (e.g., method needing dynamic this).
+
+
+34. Start with function greet(name){ return 'Hi '+name+'!'; } Convert to arrow function using Const not let ya habeby :).
+
+35. Build pipeline functions: add2, times3, minus1 (all arrows). Write runPipeline(n, fnsArray) that loops through and applies each. Test runPipeline(5, [add2,times3,minus1]).
+
+36. (write answers BEFORE running):
+    var obj = { n: 1, inc: function(){ this.n++; return this.n; } };
+    var inc = obj.inc;
+    console.log(obj.inc());
+    console.log(inc()); 
+   Explain both lines.
+
+37. Create many counters in a loop (e.g. 1000) and store them in an array. Comment on potential memory considerations of large closure arrays.
+
+38. Write safeFirst() that returns undefined if called with zero args else return array of the args.
+
+39. factory(namesArray) returns object with a counter function for each name (all independent). Example: var counters = factory(['a','b']); counters.a(); counters.b();
+
+40. Write 2 things that were new or tricky today (comment).
+ 
+

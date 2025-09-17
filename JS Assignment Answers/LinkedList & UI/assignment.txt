@@ -1,0 +1,11 @@
+Build a linked list data structure with JS using classes and its core methods:
+
+- peek(): returns the value of the head node without removing it from the list.
+- insert(value): adds a new node with the specified value to the end of the list.
+- remove(): removes the head node from the list and returns its value.
+- isEmpty(): returns true if the list is empty, otherwise false.
+- length(): returns the number of nodes in the list.
+- reverse(): reverses the order of the nodes in the list.
+
+Provide a UI with html, css, and js to interact with the linked list and demonstrate its functionality.
+Each node will have a different color.

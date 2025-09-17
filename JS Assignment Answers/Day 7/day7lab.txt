@@ -1,0 +1,16 @@
+1- Write a function that greets a user, using a default parameter for the name.
+2- Write a function that calculates the total price with a default tax rate parameter.
+3- Write a function that creates a user object, using a default role parameter.
+4- Write a function that multiplies any number of arguments using the rest operator.
+5- Write a function that multiplies the first argument by the sum of all the rest using the rest operator.
+6- Write a function that takes a variable number of strings and returns them as a single array using the rest operator.
+7- Create a new array by combining two arrays using the spread operator.
+8- Copy an array using the spread operator.
+9- Merge two objects into one using the spread operator.
+10- Update a property in an object using the spread operator to create a new object.
+11- Destructure an array to get the first and second elements into variables.
+12- Destructure an array to get the first element and the rest into another array.
+13- Destructure an object to extract two properties into variables.
+14- Destructure an object and rename the extracted properties.
+15- Write a function that takes an object as a parameter and uses destructuring in the parameter list to extract specific properties.
+https://docs.google.com/spreadsheets/d/1aGCowdF3QdGwGfV7UZgIBcP3_vzgoEsGgx7Ff7wytJM/edit?gid=0#gid=0

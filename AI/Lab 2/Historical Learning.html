@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chat-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-container::-webkit-scrollbar-thumb {
+            background-color: #4a5568;
+            border-radius: 3px;
+        }
+        .chat-container::-webkit-scrollbar-track {
+            background-color: #2d3748;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex h-screen antialiased">
+
+    <!-- Sidebar for selecting historical figures -->
+    <aside class="w-1/3 lg:w-1/4 bg-gray-800 p-6 flex flex-col border-r border-gray-700">
+        <h1 class="text-2xl font-bold mb-6 text-gray-100">Chat with History</h1>
+        <p class="text-gray-400 mb-8">Select a figure from the past to begin a conversation and explore their world.</p>
+        <div id="character-list" class="space-y-4">
+            <!-- Character profiles will be injected here by JavaScript -->
+        </div>
+        <div class="mt-auto text-center text-gray-500 text-sm">
+            <p>&copy; 2024 Historical AI</p>
+        </div>
+    </aside>
+
+    <!-- Main Chat Interface -->
+    <main id="chat-interface" class="w-2/3 lg:w-3/4 flex flex-col bg-gray-900 transition-opacity duration-500 opacity-0">
+        <!-- Chat Header -->
+        <header class="bg-gray-800/50 backdrop-blur-sm p-4 flex items-center border-b border-gray-700">
+            <img id="chat-header-img" src="https://placehold.co/48x48/718096/E2E8F0?text=?" alt="Character Avatar" class="w-12 h-12 rounded-full mr-4 border-2 border-gray-600">
+            <div>
+                <h2 id="chat-header-name" class="text-xl font-semibold text-gray-100">Select a Figure</h2>
+                <p id="chat-header-title" class="text-sm text-gray-400">Awaiting your selection...</p>
+            </div>
+        </header>
+
+        <!-- Messages Area -->
+        <div id="chat-container" class="flex-1 p-6 overflow-y-auto chat-container">
+            <div id="welcome-message" class="flex justify-center items-center h-full">
+                <div class="text-center text-gray-500">
+                    <svg class="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                    <h3 class="text-xl font-medium">Your journey through time awaits.</h3>
+                    <p>Please select a historical figure from the left to start a conversation.</p>
+                </div>
+            </div>
+            <div id="message-list" class="space-y-6">
+                <!-- Chat messages will be appended here -->
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <footer class="p-4 border-t border-gray-700 bg-gray-800/50">
+            <form id="chat-form" class="flex items-center space-x-4">
+                <input type="text" id="message-input" placeholder="Ask a question..." class="flex-1 bg-gray-700 border border-gray-600 rounded-full py-3 px-5 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300" disabled>
+                <button type="submit" id="send-button" class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full p-3 transition duration-300 disabled:bg-gray-600 disabled:cursor-not-allowed" disabled>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </button>
+            </form>
+        </footer>
+    </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const characters = {
+            cleopatra: {
+                name: 'Cleopatra',
+                title: 'Queen of the Ptolemaic Kingdom of Egypt',
+                avatar: 'https://placehold.co/100x100/4A2311/FFFFFF?text=Cleo',
+                bio: 'The last active ruler of the Ptolemaic Kingdom of Egypt.',
+                greetings: [
+                    "Greetings from the banks of the Nile. I am Cleopatra, Queen of Egypt. What knowledge do you seek of my time?",
+                    "Welcome, traveler. You stand in the presence of Cleopatra. Speak, and let your curiosities be known."
+                ],
+                responses: {
+                    default: "That is an interesting thought. The world has changed much. Tell me more of your time.",
+                    "your rule": "I ruled from 51 to 30 BC, a time of great political turmoil and alliance with Rome. My reign was dedicated to the prosperity and independence of Egypt.",
+                    "rome": "Rome... a city of immense power and ambition. My relationships with Julius Caesar and Mark Antony were as political as they were personal, all to secure Egypt's future.",
+                    "legacy": "I hope to be remembered not just for my beauty, but for my intellect, my command of many languages, and my unwavering devotion to my kingdom and my people.",
+                    "life": "Life in Alexandria was a vibrant tapestry of culture, knowledge, and power. The Great Library was the jewel of our world, a testament to human curiosity.",
+                    "love": "Love, in the world of rulers, is a luxury often intertwined with strategy. My heart's choices were always guided by the needs of my kingdom."
+                }
+            },
+            einstein: {
+                name: 'Albert Einstein',
+                title: 'Theoretical Physicist',
+                avatar: 'https://placehold.co/100x100/1F2937/E5E7EB?text=AE',
+                bio: 'Developed the theory of relativity, one of the two pillars of modern physics.',
+                greetings: [
+                    "Hello! It is a pleasure to ponder the universe's questions with you. What is on your mind?",
+                    "Good day. The world is a complex puzzle. What piece shall we examine together?"
+                ],
+                responses: {
+                    default: "A fascinating question! It reminds me that imagination is more important than knowledge. Let us explore this further.",
+                    "relativity": "Ah, relativity! In essence, it describes how space and time are linked for objects that are moving at a consistent speed in a straight line. E=mc² is the most famous part, showing the equivalence of mass and energy.",
+                    "imagination": "Imagination is everything. It is the preview of life's coming attractions. Without it, we would make no new discoveries.",
+                    "god": "I believe in Spinoza's God who reveals himself in the orderly harmony of what exists, not in a God who concerns himself with the fates and actions of human beings. The question is not simple.",
+                    "time": "The only reason for time is so that everything doesn't happen at once. It is relative, you see, depending on your frame of reference.",
+                    "advice": "Strive not to be a success, but rather to be of value. And never lose a holy curiosity."
+                }
+            },
+            shakespeare: {
+                name: 'William Shakespeare',
+                title: 'Playwright, Poet, Actor',
+                avatar: 'https://placehold.co/100x100/581C87/F3E8FF?text=WS',
+                bio: 'Widely regarded as the greatest writer in the English language.',
+                greetings: [
+                    "Good morrow! The world's a stage, and you have found your way to my humble presence. What dost thou wish to ask?",
+                    "Welcome, friend. Speak thy mind freely. What thoughts trouble or delight thee this day?"
+                ],
+                responses: {
+                    default: "A curious turn of phrase! Prithee, elaborate, for all the world's a stage, and I am but a keen observer.",
+                    "your plays": "I penned comedies, tragedies, and histories. From the star-cross'd lovers of Verona to the tragic king of Denmark, my goal was always to hold a mirror up to nature.",
+                    "inspiration": "Inspiration is found in the grand tapestry of human life—in love, loss, ambition, and folly. I merely gave these feelings a voice and a stage.",
+                    "favorite play": "To choose a favorite 'mongst mine own children? 'Tis a task impossible! Each holds a piece of my soul. Perhaps Hamlet, for its endless questions about the human condition.",
+                    "love": "Love is a smoke made with the fume of sighs; Being purged, a fire sparkling in lovers' eyes. It is a madness most discreet, a choking gall, and a preserving sweet.",
+                    "legacy": "I hope my words have given voice to the voiceless and that they continue to be spoken and debated for generations to come. The play's the thing."
+                }
+            }
+        };
+
+        let currentCharacter = null;
+
+        const characterList = document.getElementById('character-list');
+        const chatInterface = document.getElementById('chat-interface');
+        const chatHeaderImg = document.getElementById('chat-header-img');
+        const chatHeaderName = document.getElementById('chat-header-name');
+        const chatHeaderTitle = document.getElementById('chat-header-title');
+        const messageList = document.getElementById('message-list');
+        const welcomeMessage = document.getElementById('welcome-message');
+        const chatForm = document.getElementById('chat-form');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const chatContainer = document.getElementById('chat-container');
+
+        // Populate character list
+        Object.keys(characters).forEach(key => {
+            const char = characters[key];
+            const charElement = document.createElement('div');
+            charElement.className = 'flex items-center p-3 bg-gray-700/50 rounded-lg cursor-pointer hover:bg-gray-700 transition duration-300';
+            charElement.dataset.char = key;
+            charElement.innerHTML = `
+                <img src="${char.avatar}" alt="${char.name}" class="w-12 h-12 rounded-full mr-4 border-2 border-gray-600">
+                <div>
+                    <h3 class="font-semibold text-gray-100">${char.name}</h3>
+                    <p class="text-sm text-gray-400">${char.title}</p>
+                </div>
+            `;
+            charElement.addEventListener('click', () => selectCharacter(key));
+            characterList.appendChild(charElement);
+        });
+
+        function selectCharacter(key) {
+            currentCharacter = characters[key];
+            
+            // Update active character in the list
+            Array.from(characterList.children).forEach(child => {
+                child.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+                child.classList.add('bg-gray-700/50', 'hover:bg-gray-700');
+                if(child.dataset.char === key) {
+                    child.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+                    child.classList.remove('bg-gray-700/50', 'hover:bg-gray-700');
+                }
+            });
+
+            // Update chat header
+            chatHeaderImg.src = currentCharacter.avatar;
+            chatHeaderName.textContent = currentCharacter.name;
+            chatHeaderTitle.textContent = currentCharacter.title;
+
+            // Reset chat
+            messageList.innerHTML = '';
+            welcomeMessage.style.display = 'none';
+            chatInterface.classList.remove('opacity-0');
+            
+            // Enable input
+            messageInput.disabled = false;
+            sendButton.disabled = false;
+            messageInput.placeholder = `Ask ${currentCharacter.name} a question...`;
+
+            // Display greeting
+            const greeting = currentCharacter.greetings[Math.floor(Math.random() * currentCharacter.greetings.length)];
+            addMessage('bot', greeting);
+        }
+        
+        function addMessage(sender, text) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('flex', 'items-start', 'gap-4', 'fade-in');
+            
+            if (sender === 'user') {
+                messageElement.classList.add('justify-end');
+                messageElement.innerHTML = `
+                    <div class="bg-indigo-600 rounded-lg p-3 max-w-lg">
+                        <p>${text}</p>
+                    </div>
+                    <img src="https://placehold.co/40x40/9CA3AF/FFFFFF?text=You" alt="User" class="w-10 h-10 rounded-full">
+                `;
+            } else {
+                messageElement.classList.add('justify-start');
+                messageElement.innerHTML = `
+                    <img src="${currentCharacter.avatar}" alt="${currentCharacter.name}" class="w-10 h-10 rounded-full">
+                    <div class="bg-gray-700 rounded-lg p-3 max-w-lg">
+                        <p>${text}</p>
+                    </div>
+                `;
+            }
+            messageList.appendChild(messageElement);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userMessage = messageInput.value.trim();
+            if (!userMessage || !currentCharacter) return;
+
+            addMessage('user', userMessage);
+            messageInput.value = '';
+            
+            // Simulate bot thinking and responding
+            setTimeout(() => {
+                const botResponse = getBotResponse(userMessage);
+                addMessage('bot', botResponse);
+            }, 1000 + Math.random() * 500);
+        });
+
+        function getBotResponse(userInput) {
+            const lowerInput = userInput.toLowerCase();
+            for (const keyword in currentCharacter.responses) {
+                if (lowerInput.includes(keyword)) {
+                    return currentCharacter.responses[keyword];
+                }
+            }
+            return currentCharacter.responses.default;
+        }
+    });
+</script>
+
+</body>
+</html>

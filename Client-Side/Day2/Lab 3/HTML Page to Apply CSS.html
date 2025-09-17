@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> CSS magic</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	
+	<!-- 5. Internal Styles -->
+	<style>
+		/* 5a. Class for ul without bullets */
+		.none-bullet-list {
+			list-style-type: none;
+		}
+		
+		/* 5b. Links style - direct child of li inside span with id linksbar */
+		#linksbar > ul > li > a {
+			color: red;
+			background-color: pink;
+			text-decoration: none;
+		}
+		
+		/* 5c. Links hover style */
+		#linksbar > ul > li > a:hover {
+			color: pink;
+			background-color: red;
+		}
+		
+		/* 5d. Paragraph directly after h2 that's direct child of span with id content */
+		#content > h2 + p {
+			font-weight: bold;
+			font-size: 12px;
+		}
+		
+		/* 5e. Dashed border for div with id loginform */
+		#loginform {
+			border: 2px dashed rgb(20,70,60);
+		}
+		
+		/* 5f. Background color for input type text */
+		input[type="text"] {
+			background-color: yellow;
+		}
+		
+		/* 5f. Background color white when focused */
+		input[type="text"]:focus {
+			background-color: white;
+		}
+		
+		/* 5g. Class for table-bordered display */
+		.tabled-bordered {
+			display: table-cell;
+			padding: 5px;
+			border: 1px solid black;
+		}
+		
+		/* 5h. Pseudo element after paragraph nested from span */
+		span p::after {
+			content: "Read this";
+			color: yellow;
+		}
+		
+		/* 6. First style - p with id aboutus */
+		#aboutus {
+			color: red !important;
+		}
+		
+		/* 6. Second style - p with id aboutus direct child from span with id content */
+		#content > p#aboutus {
+			color: yellow;
+		}
+	</style>
+</head>
+<body>
+	<!-- 2. Inline style for div with header id -->
+	<div id="header" style="width: 100%; height: 60px; background-color: red;">
+		<h1>This is the page header</h1>
+	</div>
+	
+	<!-- 3. Inline style for span with linksbar id -->
+	<span id="linksbar" style="width: 25%; background-color: gray; float: left;">
+		<div id="loginform" >
+			User name: <input type="text"/>
+			</br>
+			Password: <input type="password"/>
+			<br/>
+			<input type="checkbox" /> remember me
+			<br/>
+			<button>login</button>
+		</div>
+		<h2> site menu</h2>
+		<!-- 5a. Applied none-bullet-list class -->
+		<ul class="none-bullet-list">
+			<li><a href="#">link1</a></li>
+			<li><a href="#">link2</a></li>
+			<li><a href="#">link3</a></li>
+			<li><a href="#">link4</a></li>
+			<li><a href="#">link5</a></li>
+		</ul>
+	</span>
+	
+	<!-- 4. Inline style for span with content id -->
+	<span id="content" style="width: 75%; height: 70%; background-color: pink; float: left;">
+		<h2> about us</h2>
+		<!-- <p id="aboutus">
+			This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph.
+		</p> -->
+		
+		<span id="aboutus">
+			This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph This is a paragraph.
+		</span>
+		
+		<div id="titles">
+			<!-- 5g. Applied tabled-bordered class to p tags -->
+			<!-- <p class="tabled-bordered"> title1</p>
+			<p class="tabled-bordered"> title2</p>
+			<p class="tabled-bordered"> title3</p> -->
+
+			<span class="tabled-bordered"> title1</span>
+			<span class="tabled-bordered"> title2</span>
+			<span class="tabled-bordered"> title3</span>
+		</div>
+
+	</span>
+
+
+
+</body>
+</html>

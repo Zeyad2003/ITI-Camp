@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM</title>
+    <style>
+      .target-div {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-top: 10px;
+      }
+      .class-a {
+        background-color: yellow;
+        color: black;
+      }
+      .class-b {
+        background-color: blue;
+        color: white;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+   
+  </head>
+  <body>
+    <h1>Day4 DOM</h1>
+    <div id="my-div">
+      <p id="my-p">Hello ISI</p>
+    </div>
+    <form action="test.html">
+      <input type="text" id="my-input" placeholder="Type something..." />
+      <input
+        type="email"
+        name="user-email"
+        id="my-email"
+        placeholder="Type your email..."
+      />
+      <select name="user-country" id="my-select">
+        <option value="us">United States</option>
+        <option value="EG">Egypt</option>
+        <option value="uk">United Kingdom</option>
+      </select>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+    <div class="target-div" id="div-2">
+      <h3>create element using js</h3>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque,
+        reiciendis!
+      </p>
+    </div>
+
+
+    <div id="slider-container" style="width:520px;margin:20px auto;text-align:center;">
+      <img id="slider-img" src="assets/Apple-Logo-500x281.png" style="width:500px;height:281px;display:block;margin:0 auto;" alt="Slider Image">
+      <div style="margin-top:10px;">
+        <button onclick="prevSliderImage()">Prev</button>
+        <button onclick="nextSliderImage()">Next</button>
+        <button onclick="startSlider()">Start</button>
+        <button onclick="stopSlider()">Stop</button>
+      </div>
+    </div>
+
+    <div id="wrapper">
+      <p id="first">First</p>
+      <p id="second">Second</p>
+    </div>
+
+    <script src="answer.js"></script>
+  </body>
+</html>

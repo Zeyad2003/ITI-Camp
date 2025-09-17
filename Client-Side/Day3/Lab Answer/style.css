@@ -1,0 +1,135 @@
+/* ===== FIRST PART ===== */
+.navbar {
+    /* position: fixed; */
+    position: sticky;
+    top: 0;
+    width: 100%;
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbar li {
+    display: inline-block;
+}
+
+.navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar li a:hover {
+    background-color: black;
+}
+
+.navbar .active {
+    background-color: #4CAF50;
+}
+
+.content {
+    padding: 16px;
+}
+
+body {
+    padding-top: 20px; 
+}
+
+/* ============ SECOND PART ============ */
+/* ===== image with text overlay ===== */
+.image-container {
+    position: relative;
+    max-width: 40%;
+    margin: 40px auto;
+}
+
+.image-container img {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+
+.text-box {
+    position: absolute;
+    bottom: 4%;
+    left: 3%;
+    z-index: 1;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ===== Photo Gallery with Flexbox ===== */
+.photo-gallery {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to flow to the next line */
+  justify-content: center; /* Centers the items on the line */
+  gap: 16px; /* Creates space between the cards */
+  padding: 16px;
+}
+
+.gallery-card {
+  width: 400px; /* Sets a consistent width for each card */
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border: 1px solid #eee;
+  border-radius: 4px;
+  overflow: hidden; /* Ensures the image corners are rounded */
+}
+
+.gallery-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-card h3, .gallery-card p {
+  padding: 0 16px; /* Add padding only to the text */
+}
+
+.gallery-card h3 {
+  margin-top: 12px;
+  margin-bottom: 4px;
+}
+
+.gallery-card p {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #666;
+}
+
+/* ===== Vertical Menu ===== */
+.vertical-menu {
+  list-style-type: none; /* Removes the default list bullets */
+  margin: 0;
+  padding: 0;
+  width: 250px; /* Set a width for the menu */
+  background-color: #333; /* Dark background */
+  border: 2px solid #C00; /* Red border as in the image */
+}
+
+.vertical-menu li a {
+  display: block; /* Makes the whole area clickable */
+  color: white;
+  text-decoration: none; /* Removes the default underline */
+  padding: 12px 16px; /* Adds space inside each link */
+}
+
+/* Change background color on hover, except for the active item */
+.vertical-menu li a:hover:not(.active) {
+  background-color: #555;
+}
+
+/* Style for the active/current link */
+.vertical-menu .active {
+  background-color: #C00; /* Red highlight color */
+  color: white;
+}

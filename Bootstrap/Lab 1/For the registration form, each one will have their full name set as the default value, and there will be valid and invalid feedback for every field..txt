@@ -1,0 +1,1 @@
+For the registration form, each one will have their full name set as the default value, and there will be valid and invalid feedback for every field.

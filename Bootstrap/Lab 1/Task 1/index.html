@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio | Mike Dakotta</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header / Hero -->
+    <header class="bg-light border-bottom mb-5">
+      <div class="container py-5">
+        <div class="row align-items-center g-4">
+          <div class="col-12 col-md-3 text-center">
+            <img
+              src="./assets/employee icon.jpg"
+              class="img-fluid rounded-circle avatar shadow-sm"
+              alt="Profile photo"
+            />
+          </div>
+          <div class="col-12 col-md-9 text-center text-md-start">
+            <h1 class="h2 mb-2">Mike Dakotta</h1>
+            <p class="lead mb-3">Front-End Developer</p>
+            <p class="mb-3 small text-body-secondary">
+              I build clean, responsive, accessible interfaces using HTML, CSS,
+              JavaScript, and Bootstrap. I care about simplicity, readability,
+              and good user experience.
+            </p>
+            <div
+              class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start small"
+            >
+              <span
+                ><strong>Email:</strong>
+                <a href="mailto:you@example.com">you@example.com</a></span
+              >
+              <span><strong>Phone:</strong> +123 456 7890</span>
+              <span><strong>Location:</strong> Cairo, Egypt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Skills -->
+      <section id="skills" class="container mb-5">
+        <h2 class="section-title h4">Skills</h2>
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item mb-2">
+            <span class="badge text-bg-primary">HTML</span>
+          </li>
+          <li class="list-inline-item mb-2">
+            <span class="badge text-bg-primary">CSS / SCSS</span>
+          </li>
+          <li class="list-inline-item mb-2">
+            <span class="badge text-bg-primary">JavaScript</span>
+          </li>
+          <li class="list-inline-item mb-2">
+            <span class="badge text-bg-secondary">Bootstrap</span>
+          </li>
+          <li class="list-inline-item mb-2">
+            <span class="badge text-bg-secondary">Git</span>
+          </li>
+          <li class="list-inline-item mb-2">
+            <span class="badge text-bg-secondary">Responsive Design</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects" class="container mb-5">
+        <h2 class="section-title h4">Projects</h2>
+        <div class="row g-4">
+          <div class="col-sm-6 col-lg-4">
+            <div class="card h-100">
+              <img src="https://picsum.photos/seed/landing/600/360" class="card-img-top project-thumb" alt="Landing Page project preview" />
+              <div class="card-body">
+                <h3 class="h6 card-title mb-2">Landing Page</h3>
+                <p class="card-text small mb-0">
+                  Responsive marketing page built with Bootstrap grid and
+                  utility classes.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="card h-100">
+              <img src="https://picsum.photos/seed/portfolio/600/360" class="card-img-top project-thumb" alt="Portfolio Template project preview" />
+              <div class="card-body">
+                <h3 class="h6 card-title mb-2">Portfolio Template</h3>
+                <p class="card-text small mb-0">
+                  Reusable simple layout focusing on clarity and accessibility.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4">
+            <div class="card h-100">
+              <img src="https://picsum.photos/seed/formui/600/360" class="card-img-top project-thumb" alt="Form UI project preview" />
+              <div class="card-body">
+                <h3 class="h6 card-title mb-2">Form UI</h3>
+                <p class="card-text small mb-0">
+                  Clean validated form using Bootstrap components and semantics.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Achievements -->
+      <section id="achievements" class="container mb-5">
+        <h2 class="section-title h4">Achievements & Certifications</h2>
+        <ul class="list-group small">
+          <li class="list-group-item">Certified Web Fundamentals – 2024</li>
+          <li class="list-group-item">UI Design Challenge Finalist</li>
+          <li class="list-group-item">
+            Accessibility & Semantic HTML Workshop
+          </li>
+        </ul>
+      </section>
+
+      <!-- Contact Form -->
+      <section id="contact" class="container mb-5">
+        <h2 class="section-title h4">Contact</h2>
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <form class="needs-validation" novalidate>
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-control"
+                  placeholder="Mike Dakotta"
+                  required
+                />
+                <div class="invalid-feedback">Name required.</div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="you@example.com"
+                  required
+                />
+                <div class="invalid-feedback">Valid email required.</div>
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea
+                  id="message"
+                  rows="5"
+                  class="form-control"
+                  placeholder="Write a message..."
+                  required
+                ></textarea>
+                <div class="invalid-feedback">Message required.</div>
+              </div>
+              <button class="btn btn-primary" type="submit">Send</button>
+            </form>
+          </div>
+          <div class="col-lg-6 small">
+            <p class="mb-2">
+              <strong>Email:</strong>
+              <a href="mailto:you@example.com">you@example.com</a>
+            </p>
+            <p class="mb-2"><strong>Phone:</strong> +123 456 7890</p>
+            <p class="mb-2"><strong>Location:</strong> Cairo, Egypt</p>
+            <p class="text-body-secondary mb-0">
+              I'll get back to you as soon as I can. Thanks for visiting!
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="py-4 bg-light border-top mt-5 small">
+      <div class="container text-center">
+        &copy; <span id="year"></span> Mike Dakotta
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Only minimal logic: year + simple Bootstrap validation pattern
+      document.getElementById("year").textContent = new Date().getFullYear();
+      (() => {
+        const forms = document.querySelectorAll(".needs-validation");
+        forms.forEach((form) => {
+          form.addEventListener("submit", (e) => {
+            if (!form.checkValidity()) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+            form.classList.add("was-validated");
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

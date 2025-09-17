@@ -1,0 +1,11 @@
+/* Keep styles minimal to complement Bootstrap */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+form .form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Optional: tighten container spacing on small forms */
+main.container { max-width: 980px; }

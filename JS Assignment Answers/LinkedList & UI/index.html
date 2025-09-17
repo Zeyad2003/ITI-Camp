@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked List UI</title>
+    <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Linked List Visualization</h1>
+        <div class="controls">
+            <input type="text" id="nodeValue" placeholder="Enter node value">
+            <button id="insertBtn">Insert</button>
+            <button id="peekBtn">Peek</button>
+            <button id="removeBtn">Remove</button>
+            <button id="reverseBtn">Reverse</button>
+        </div>
+        <div id="linkedList" class="linked-list"></div>
+        <div class="info">
+            <p id="listLength">Length: 0</p>
+            <p id="isEmpty">Is Empty: true</p>
+        </div>
+    </div>
+    
+    <script type="module" src="src/js/app.js"></script>
+</body>
+</html>

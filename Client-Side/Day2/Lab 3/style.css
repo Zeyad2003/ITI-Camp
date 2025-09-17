@@ -1,0 +1,9 @@
+/* 1a. Make font type "Lucida Calligraphy" for p, div, span tags */
+p, div, span {
+    font-family: "Lucida Calligraphy", cursive;
+}
+
+/* 1b. Center h1 tag which is child from div tag */
+div > h1 {
+    text-align: center;
+}
