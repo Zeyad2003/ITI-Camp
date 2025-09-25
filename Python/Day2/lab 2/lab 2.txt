@@ -1,0 +1,61 @@
+"""
+    Python Practice Tasks
+    =====================
+
+    Rules:
+        - Everything must be written inside functions.
+        - The file should run as a script.
+        - When the script starts, the user must see a menu of numbered scenarios (1: List order, 2: Pepole with favorite color , .....).
+        - The user chooses a number, and the program runs the corresponding function.
+        - Each task should only run when chosen from the menu.
+        - At ANY stage: if the user enters invalid input, the program must:
+              * Show an error message
+              * Display what valid input looks like
+              * Let the user try again (do not crash or exit)
+
+    Tasks:
+    ------
+
+    1 - Ask the user to enter 5 numbers.
+        Store them, then display them in ascending order and descending order.
+
+    2 - Write a function that takes two numbers: (length, start).
+        Generate a sequence of numbers with the given length,
+        starting from the given start number and increasing by one each time.
+        Print the result.
+
+    3 - Keep asking the user for numbers until they type "done".
+        When finished, print:
+            * The total of all numbers entered
+            * The count of valid entries
+            * The average
+        If the user enters something invalid, show an error and continue.
+        
+    4 - Ask the user to enter a list of numbers.
+        Remove any duplicates, sort the result, and display it.
+
+
+    6 - Ask the user to enter a sentence.
+        Count how many times each word appears in the sentence
+        and display the result.
+
+    7 - Create a small gradebook system:
+        - The user enters 5 students names and their scores.
+        - At the end, show:
+            * The highest score
+            * The lowest score
+            * The average score.
+
+    8 - Write a program that simulates a shopping cart:
+        - The user can add items with a name and a price.
+        - The user can remove items by name.
+        - The user can view all items with their prices.
+        - At the end, display the total cost.
+
+    9 - Create a number guessing game:
+        - The program randomly selects a number between 1 and 20.
+        - The user keeps guessing until they get it right.
+        - After each guess, show if the guess was too high or too low.
+        - When correct, display the number of attempts.
+"""
+
