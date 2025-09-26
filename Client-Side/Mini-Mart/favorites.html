@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniMart - Favorites</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>MiniMart</h1>
+        <nav>
+            <a href="index.html">Products</a>
+            <a href="favorites.html" class="active">Favorites</a>
+            <a href="cart.html">Cart</a>
+            <a href="checkout.html">Checkout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Favorites</h2>
+        <div id="favorite-products" class="product-grid"></div>
+        <div id="loading" class="loading">Loading...</div>
+        <div id="empty-favorites" style="display: none;" class="loading">
+            <p>You haven't favorited any items yet.</p>
+        </div>
+    </main>
+
+    <div id="notification-popup" class="notification"></div>
+
+    <footer>
+        <p>© 2025 MiniMart Project</p>
+    </footer>
+
+    <script src="js/favorites.js" type="module"></script>
+</body>
+</html>

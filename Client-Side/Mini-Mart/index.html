@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniMart</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>MiniMart</h1>
+        <nav>
+            <a href="index.html" class="active">Products</a>
+            <a href="favorites.html">Favorites</a>
+            <a href="cart.html">Cart</a>
+            <a href="checkout.html">Checkout</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="filters">
+            <input type="search" id="search" placeholder="Search by name...">
+            <div id="category-filters" class="category-filters"></div>
+        </div>
+        <div id="products" class="product-grid"></div>
+        <div id="loading" class="loading">Loading...</div>
+    </main>
+
+    <div id="notification-popup" class="notification"></div>
+
+    <footer>
+        <p>© 2025 MiniMart Project</p>
+    </footer>
+
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>
