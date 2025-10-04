@@ -91,7 +91,7 @@ categoryFilters.addEventListener('click', (event) => {
 });
 
 productsGrid.addEventListener('click', (event) => {
-    const target = event.target; // Define 'target' once
+    const target = event.target;
     const productId = parseInt(target.dataset.productId, 10);
 
     if (target.closest('.favorite-btn')) {

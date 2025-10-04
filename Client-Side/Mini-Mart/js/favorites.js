@@ -1,6 +1,6 @@
 import { getFavorites, saveFavorites } from './storage.js';
 import { fetchProducts } from './api.js';
-import { addToCart } from './cart-utils.js'; // <-- Import the shared cart function
+import { addToCart } from './cart-utils.js';
 import { createProductCard } from './ui.js';
 
 const productsGrid = document.getElementById('favorite-products');
@@ -27,18 +27,17 @@ function displayFavorites() {
     });
 }
 
+// Event Listener for favorite and add to cart buttons
 productsGrid.addEventListener('click', (event) => {
     const target = event.target;
     const productId = parseInt(target.dataset.productId, 10);
 
-    // Handle removing from favorites
     if (target.classList.contains('favorite-btn')) {
         favorites.delete(productId);
         saveFavorites(favorites);
-        displayFavorites(); // Re-render the list
+        displayFavorites();
     }
 
-    // Handle adding to cart
     if (target.classList.contains('add-to-cart-btn')) {
         addToCart(productId);
     }

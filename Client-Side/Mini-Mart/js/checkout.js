@@ -1,7 +1,6 @@
 import { getCart, saveCart } from './storage.js';
 import { fetchProducts } from './api.js';
 
-// DOM Elements
 const summaryContainer = document.getElementById('order-summary');
 const form = document.getElementById('checkout-form');
 const loadingIndicator = document.getElementById('loading');
@@ -15,7 +14,7 @@ async function init() {
     if (cart.length === 0) {
         loadingIndicator.style.display = 'none';
         summaryContainer.innerHTML = '<p>Your cart is empty. Nothing to check out!</p>';
-        form.style.display = 'none'; // Hide form if cart is empty
+        form.style.display = 'none';
         return;
     }
 
@@ -57,27 +56,13 @@ function displayOrderSummary(cart, allProducts) {
     summaryContainer.appendChild(totalElement);
 }
 
-// Form validation and submission
 form.addEventListener('submit', (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault(); // Prevent default page reload on form submission
 
-    // Basic validation
-    const name = form.elements['name'].value.trim();
-    const email = form.elements['email'].value.trim();
-    const address = form.elements['address'].value.trim();
-
-    if (!name || !email || !address) {
-        alert('Please fill out all fields.');
-        return;
-    }
-
-    // Simulate order submission
     console.log('Order submitted:', { name, email, address, cart: getCart() });
 
-    // Clear the cart
     saveCart([]);
 
-    // Show success message
     mainContent.style.display = 'none';
     successMessage.style.display = 'block';
 });

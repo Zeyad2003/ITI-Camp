@@ -1,6 +1,6 @@
 import { getCart, saveCart } from './storage.js';
 
-let notificationTimeout; // Holds the timer to prevent multiple notifications overlapping
+let notificationTimeout;
 
 function showNotification(message) {
     const notificationPopup = document.getElementById('notification-popup');
@@ -21,10 +21,8 @@ export function addToCart(productId) {
     const existingItem = cart.find(item => item.productId === productId);
 
     if (existingItem) {
-        // If item exists, increase quantity
         existingItem.qty += 1;
     } else {
-        // Otherwise, add it to the cart
         cart.push({ productId: productId, qty: 1 });
     }
     

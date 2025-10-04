@@ -1,5 +1,5 @@
-const FAVORITES_KEY = 'mm_favorites';
-const CART_KEY = 'mm_cart';
+const FAVORITES_KEY = 'favorites_key';
+const CART_KEY = 'cart_key';
 
 export function getFavorites() {
     const favorites = localStorage.getItem(FAVORITES_KEY);

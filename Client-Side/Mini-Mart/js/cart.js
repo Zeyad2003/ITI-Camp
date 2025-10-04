@@ -75,7 +75,7 @@ function updateCart(productId, newQty) {
 
     if (newQty > 0) {
         itemInCart.qty = newQty;
-    } else {
+    } else { // Take all except the one with quantity less than 1
         cart = cart.filter(item => item.productId !== productId);
     }
     
@@ -95,7 +95,7 @@ cartContainer.addEventListener('click', (event) => {
     const productId = parseInt(target.dataset.id);
     if (!productId) return;
 
-    const item = cart.find(i => i.productId === productId);
+    const item = cart.find(item => item.productId === productId);
     if (!item) return;
 
     if (target.classList.contains('increase-qty')) {
@@ -103,7 +103,7 @@ cartContainer.addEventListener('click', (event) => {
     } else if (target.classList.contains('decrease-qty')) {
         updateCart(productId, item.qty - 1);
     } else if (target.classList.contains('remove-item-btn')) {
-        updateCart(productId, 0); // Setting qty to 0 removes the item
+        updateCart(productId, 0);
     }
 });
 
