@@ -1,0 +1,12 @@
+create 2 applications that expose an API endpoint using Django.
+
+first one is student app and expose an endpoint like this:
+{baseURL}/student/{StudentName}
+it will return a rendered HTML say Hello, {StudentName} as header (as simple as that)
+
+second one is course app and expose an endpoint like this:
+{baseURL}/course/{CourseName}
+it will return a rendered HTML say Welcome to {CourseName} course as header.
+
+Could you implement this task using Django and prepare the venv environment for it and all required installations?
+you should place each app under day1 in django directory.
