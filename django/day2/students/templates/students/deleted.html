@@ -1,0 +1,24 @@
+{% extends 'students/base.html' %}
+{% block title %}Deleted Students{% endblock %}
+{% block content %}
+<h1>Deleted Students</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Age</th><th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in deleted %}
+      <tr>
+        <td><a href="{% url 'students:student_detail' s.id %}">{{ s.name }}</a></td>
+        <td>{{ s.age }}</td>
+        <td>{{ s.email }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="3">No deleted students.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
