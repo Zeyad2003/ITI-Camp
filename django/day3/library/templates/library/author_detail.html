@@ -1,0 +1,19 @@
+{% extends 'library/base.html' %}
+{% block title %}Author Details{% endblock %}
+{% block content %}
+<h1>{{ author.name }}</h1>
+{% if author.bio %}
+<p>{{ author.bio }}</p>
+{% else %}
+<p>No bio available.</p>
+{% endif %}
+<h2>Books by this author:</h2>
+<ul>
+  {% for book in author.book_set.all %}
+    <li><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></li>
+  {% empty %}
+    <li>No books available.</li>
+  {% endfor %}
+</ul>
+<a href="/">Back to books</a>
+{% endblock %}

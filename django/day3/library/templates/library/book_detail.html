@@ -1,0 +1,13 @@
+{% extends 'library/base.html' %}
+{% block title %}Book Details{% endblock %}
+{% block content %}
+<h1>{{ book.title }}</h1>
+<p><strong>Author:</strong> <a href="{% url 'author_detail' book.author.pk %}">{{ book.author.name }}</a></p>
+{% if book.published_year %}
+<p><strong>Published Year:</strong> {{ book.published_year }}</p>
+{% endif %}
+{% if book.description %}
+<p><strong>Description:</strong> {{ book.description }}</p>
+{% endif %}
+<a href="/">Back to list</a>
+{% endblock %}
