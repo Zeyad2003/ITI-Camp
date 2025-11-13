@@ -36,6 +36,32 @@ const PatientDashboard = () => {
   const [filter, setFilter] = useState({ specialty: '', name: '' });
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
+  const now = new Date();
+  const minDate = now.toISOString().split('T')[0];
+  const padTime = (value) => value.toString().padStart(2, '0');
+  const currentTime = `${padTime(now.getHours())}:${padTime(now.getMinutes())}`;
+  const minTime = bookingData.date === minDate ? currentTime : '00:00';
+
+  const getErrorMessage = (error, fallback) => {
+    const data = error?.response?.data;
+    if (!data) return fallback;
+    if (typeof data === 'string') return data;
+    if (data.detail) return data.detail;
+    if (data.message) return data.message;
+    const parts = [];
+    Object.values(data).forEach((value) => {
+      if (Array.isArray(value)) {
+        value.forEach((item) => {
+          if (typeof item === 'string') parts.push(item);
+          else if (item && typeof item === 'object') parts.push(JSON.stringify(item));
+        });
+      } else if (typeof value === 'string') {
+        parts.push(value);
+      }
+    });
+    return parts.length ? parts.join(' ') : fallback;
+  };
+
   const loadData = useCallback(async () => {
     try {
       if (tab === 0) {
@@ -59,7 +85,7 @@ const PatientDashboard = () => {
         setAppointments(Array.isArray(res.data) ? res.data : res.data.results || []);
       }
     } catch (error) {
-      setSnackbar({ open: true, message: 'Failed to load data', severity: 'error' });
+      setSnackbar({ open: true, message: getErrorMessage(error, 'Failed to load data'), severity: 'error' });
     }
   }, [tab, filter]);
 
@@ -74,7 +100,7 @@ const PatientDashboard = () => {
       setAvailabilities(Array.isArray(res.data) ? res.data : res.data.results || []);
       setOpenBooking(true);
     } catch (error) {
-      setSnackbar({ open: true, message: 'Failed to load availability', severity: 'error' });
+      setSnackbar({ open: true, message: getErrorMessage(error, 'Failed to load availability'), severity: 'error' });
     }
   };
 
@@ -90,8 +116,11 @@ const PatientDashboard = () => {
       loadData();
       setSnackbar({ open: true, message: 'Appointment booked', severity: 'success' });
     } catch (error) {
-      const msg = error.response?.data ? JSON.stringify(error.response.data) : 'Error booking appointment';
-      setSnackbar({ open: true, message: msg, severity: 'error' });
+      setSnackbar({
+        open: true,
+        message: getErrorMessage(error, 'Error booking appointment'),
+        severity: 'error',
+      });
     }
   };
 
@@ -101,7 +130,11 @@ const PatientDashboard = () => {
       loadData();
       setSnackbar({ open: true, message: 'Appointment cancelled', severity: 'success' });
     } catch (error) {
-      setSnackbar({ open: true, message: 'Error cancelling appointment', severity: 'error' });
+      setSnackbar({
+        open: true,
+        message: getErrorMessage(error, 'Error cancelling appointment'),
+        severity: 'error',
+      });
     }
   };
 
@@ -111,8 +144,11 @@ const PatientDashboard = () => {
       loadData();
       setSnackbar({ open: true, message: 'Profile updated', severity: 'success' });
     } catch (error) {
-      const msg = error.response?.data ? JSON.stringify(error.response.data) : 'Error updating profile';
-      setSnackbar({ open: true, message: msg, severity: 'error' });
+      setSnackbar({
+        open: true,
+        message: getErrorMessage(error, 'Error updating profile'),
+        severity: 'error',
+      });
     }
   };
 
@@ -282,6 +318,7 @@ const PatientDashboard = () => {
             value={bookingData.date}
             onChange={(e) => setBookingData({ ...bookingData, date: e.target.value })}
             InputLabelProps={{ shrink: true }}
+            inputProps={{ min: minDate }}
           />
           <TextField
             fullWidth
@@ -291,6 +328,7 @@ const PatientDashboard = () => {
             value={bookingData.time}
             onChange={(e) => setBookingData({ ...bookingData, time: e.target.value })}
             InputLabelProps={{ shrink: true }}
+            inputProps={{ min: minTime }}
           />
         </DialogContent>
         <DialogActions>

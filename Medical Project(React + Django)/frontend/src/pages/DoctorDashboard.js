@@ -28,6 +28,11 @@ const DoctorDashboard = () => {
   const [availabilities, setAvailabilities] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [profile, setProfile] = useState(null);
+  const [profileForm, setProfileForm] = useState({ bio: '', phone: '', address: '' });
+  const [specialties, setSpecialties] = useState([]);
+  const [selectedSpecialty, setSelectedSpecialty] = useState('');
+  const [newSpecialtyName, setNewSpecialtyName] = useState('');
+  const [newSpecialtyDescription, setNewSpecialtyDescription] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
   const [newAvailability, setNewAvailability] = useState({
     day_of_week: 'monday',
@@ -36,6 +41,26 @@ const DoctorDashboard = () => {
   });
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
 
+  const getErrorMessage = (error, fallback) => {
+    const data = error?.response?.data;
+    if (!data) return fallback;
+    if (typeof data === 'string') return data;
+    if (data.detail) return data.detail;
+    if (data.message) return data.message;
+    const parts = [];
+    Object.values(data).forEach((value) => {
+      if (Array.isArray(value)) {
+        value.forEach((item) => {
+          if (typeof item === 'string') parts.push(item);
+          else if (item && typeof item === 'object') parts.push(JSON.stringify(item));
+        });
+      } else if (typeof value === 'string') {
+        parts.push(value);
+      }
+    });
+    return parts.length ? parts.join(' ') : fallback;
+  };
+
   useEffect(() => {
     loadData();
   }, [tab]);
@@ -43,8 +68,25 @@ const DoctorDashboard = () => {
   const loadData = async () => {
     try {
       if (tab === 0) {
-        const res = await api.get('/doctors/me/');
-        setProfile(res.data);
+        const [profileRes, specialtiesRes] = await Promise.all([
+          api.get('/doctors/me/'),
+          api.get('/specialties/'),
+        ]);
+        const profileData = profileRes.data;
+        setProfile(profileData);
+        setProfileForm({
+          bio: profileData.bio || '',
+          phone: profileData.phone || '',
+          address: profileData.address || '',
+        });
+        setSelectedSpecialty(profileData.specialty?.id ? String(profileData.specialty.id) : '');
+        let options = Array.isArray(specialtiesRes.data)
+          ? specialtiesRes.data
+          : specialtiesRes.data.results || [];
+        if (profileData.specialty && !options.some((opt) => opt.id === profileData.specialty.id)) {
+          options = [...options, profileData.specialty];
+        }
+        setSpecialties(options);
       } else if (tab === 1) {
         const res = await api.get('/availabilities/');
         setAvailabilities(Array.isArray(res.data) ? res.data : res.data.results || []);
@@ -53,7 +95,7 @@ const DoctorDashboard = () => {
         setAppointments(Array.isArray(res.data) ? res.data : res.data.results || []);
       }
     } catch (error) {
-      setSnackbar({ open: true, message: 'Failed to load data', severity: 'error' });
+      setSnackbar({ open: true, message: getErrorMessage(error, 'Failed to load data'), severity: 'error' });
     }
   };
 
@@ -65,19 +107,44 @@ const DoctorDashboard = () => {
       loadData();
       setSnackbar({ open: true, message: 'Availability added', severity: 'success' });
     } catch (error) {
-      const msg = error.response?.data ? JSON.stringify(error.response.data) : 'Error adding availability';
-      setSnackbar({ open: true, message: msg, severity: 'error' });
+      setSnackbar({
+        open: true,
+        message: getErrorMessage(error, 'Error adding availability'),
+        severity: 'error',
+      });
     }
   };
 
   const handleUpdateProfile = async () => {
+    if (!profile) return;
+    const payload = {
+      bio: profileForm.bio,
+      phone: profileForm.phone,
+      address: profileForm.address,
+    };
+    if (selectedSpecialty) {
+      payload.specialty_id = Number(selectedSpecialty);
+    } else if (newSpecialtyName.trim()) {
+      payload.specialty_name = newSpecialtyName.trim();
+      if (newSpecialtyDescription.trim()) {
+        payload.specialty_description = newSpecialtyDescription.trim();
+      }
+    }
     try {
-      await api.patch(`/doctors/${profile.id}/`, profile);
+      await api.patch(`/doctors/${profile.id}/`, payload);
+      const message = payload.specialty_name
+        ? 'Profile updated. Specialty request sent for approval.'
+        : 'Profile updated';
+      setSnackbar({ open: true, message, severity: 'success' });
+      setNewSpecialtyName('');
+      setNewSpecialtyDescription('');
       loadData();
-      setSnackbar({ open: true, message: 'Profile updated', severity: 'success' });
     } catch (error) {
-      const msg = error.response?.data ? JSON.stringify(error.response.data) : 'Error updating profile';
-      setSnackbar({ open: true, message: msg, severity: 'error' });
+      setSnackbar({
+        open: true,
+        message: getErrorMessage(error, 'Error updating profile'),
+        severity: 'error',
+      });
     }
   };
 
@@ -87,7 +154,11 @@ const DoctorDashboard = () => {
       loadData();
       setSnackbar({ open: true, message: 'Appointment approved', severity: 'success' });
     } catch (error) {
-      setSnackbar({ open: true, message: 'Error approving appointment', severity: 'error' });
+      setSnackbar({
+        open: true,
+        message: getErrorMessage(error, 'Error approving appointment'),
+        severity: 'error',
+      });
     }
   };
 
@@ -97,7 +168,11 @@ const DoctorDashboard = () => {
       loadData();
       setSnackbar({ open: true, message: 'Appointment rejected', severity: 'success' });
     } catch (error) {
-      setSnackbar({ open: true, message: 'Error rejecting appointment', severity: 'error' });
+      setSnackbar({
+        open: true,
+        message: getErrorMessage(error, 'Error rejecting appointment'),
+        severity: 'error',
+      });
     }
   };
 
@@ -112,29 +187,89 @@ const DoctorDashboard = () => {
 
       {tab === 0 && profile && (
         <Paper sx={{ p: 3, mt: 2 }}>
+          {profile.specialty && (
+            <Alert
+              severity={profile.specialty.is_approved ? 'info' : 'warning'}
+              sx={{ mb: 2 }}
+            >
+              Current specialty: {profile.specialty.name}
+              {!profile.specialty.is_approved && ' (pending admin approval)'}
+            </Alert>
+          )}
           <TextField
             fullWidth
             label="Bio"
             multiline
             rows={4}
             margin="normal"
-            value={profile.bio || ''}
-            onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+            value={profileForm.bio}
+            onChange={(e) => setProfileForm((prev) => ({ ...prev, bio: e.target.value }))}
           />
           <TextField
             fullWidth
             label="Phone"
             margin="normal"
-            value={profile.phone || ''}
-            onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+            value={profileForm.phone}
+            onChange={(e) => setProfileForm((prev) => ({ ...prev, phone: e.target.value }))}
           />
           <TextField
             fullWidth
             label="Address"
             margin="normal"
-            value={profile.address || ''}
-            onChange={(e) => setProfile({ ...profile, address: e.target.value })}
+            value={profileForm.address}
+            onChange={(e) => setProfileForm((prev) => ({ ...prev, address: e.target.value }))}
           />
+          <TextField
+            fullWidth
+            select
+            label="Specialty"
+            margin="normal"
+            value={selectedSpecialty}
+            onChange={(e) => {
+              const value = e.target.value;
+              setSelectedSpecialty(value);
+              if (value) {
+                setNewSpecialtyName('');
+                setNewSpecialtyDescription('');
+              }
+            }}
+            helperText="Select an approved specialty or request a new one."
+          >
+            <MenuItem value="">Request new specialty</MenuItem>
+            {specialties.map((spec) => (
+              <MenuItem key={spec.id} value={String(spec.id)}>
+                {spec.name}
+              </MenuItem>
+            ))}
+          </TextField>
+          {selectedSpecialty === '' && (
+            <>
+              <TextField
+                fullWidth
+                label="New Specialty Name"
+                margin="normal"
+                value={newSpecialtyName}
+                onChange={(e) => {
+                  setSelectedSpecialty('');
+                  setNewSpecialtyName(e.target.value);
+                }}
+                helperText="Admin approval is required for new specialties."
+                required
+              />
+              <TextField
+                fullWidth
+                label="New Specialty Description (optional)"
+                margin="normal"
+                value={newSpecialtyDescription}
+                onChange={(e) => {
+                  setSelectedSpecialty('');
+                  setNewSpecialtyDescription(e.target.value);
+                }}
+                multiline
+                minRows={2}
+              />
+            </>
+          )}
           <Button variant="contained" onClick={handleUpdateProfile} sx={{ mt: 2 }}>
             Update Profile
           </Button>

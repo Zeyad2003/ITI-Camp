@@ -1,3 +1,4 @@
+from django.utils import timezone
 from rest_framework import serializers
 from .models import Availability, Appointment
 from accounts.serializers import DoctorSerializer, PatientSerializer
@@ -32,6 +33,15 @@ class AppointmentSerializer(serializers.ModelSerializer):
         date = attrs.get('date')
         time = attrs.get('time')
 
+        if date:
+            today = timezone.localdate()
+            if date < today:
+                raise serializers.ValidationError({'date': 'You cannot book an appointment in the past.'})
+            if date == today and time:
+                now_time = timezone.localtime().time()
+                if time <= now_time:
+                    raise serializers.ValidationError({'time': 'Please choose a future time.'})
+
         if doctor and date and time:
             from datetime import datetime
             appointment_datetime = datetime.combine(date, time)
@@ -56,7 +66,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             ).exists()
 
             if not availability:
-                raise serializers.ValidationError("Doctor is not available at this time")
+                raise serializers.ValidationError({'time': "Doctor is not available at this time"})
 
             existing = Appointment.objects.filter(
                 doctor=doctor,
@@ -66,7 +76,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
             ).exclude(id=self.instance.id if self.instance else None).exists()
 
             if existing:
-                raise serializers.ValidationError("This time slot is already booked")
+                raise serializers.ValidationError({'detail': "This time slot is already booked."})
 
         return attrs
 

@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -6,6 +7,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import Availability, Appointment
 from .serializers import AvailabilitySerializer, AppointmentSerializer
+from rest_framework.exceptions import ValidationError
 from accounts.permissions import IsAdmin, IsDoctor, IsPatient
 from accounts.models import Doctor, Patient
 
@@ -65,7 +67,10 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         patient = Patient.objects.get(user=self.request.user)
-        appointment = serializer.save(patient=patient)
+        try:
+            appointment = serializer.save(patient=patient)
+        except IntegrityError:
+            raise ValidationError({'detail': 'This time slot is already booked. Please choose another one.'})
         self.send_booking_email(appointment)
 
     def send_booking_email(self, appointment):

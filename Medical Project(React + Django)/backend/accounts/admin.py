@@ -14,7 +14,9 @@ class UserAdmin(BaseUserAdmin):
 
 @admin.register(Specialty)
 class SpecialtyAdmin(admin.ModelAdmin):
-    list_display = ['name', 'description']
+    list_display = ['name', 'description', 'is_approved']
+    list_filter = ['is_approved']
+    search_fields = ['name']
 
 
 @admin.register(Doctor)

@@ -38,6 +38,7 @@ npm start
 - Register with role Doctor, login
 - Doctor Dashboard → Availability → Add day/time ranges
 - Doctor Dashboard → Profile → Update details
+- Doctor Dashboard → Profile → Select an approved specialty or request a new one (admin approval required)
 
 3) Patient
 - Register with role Patient, login
@@ -51,6 +52,7 @@ Notes
 - Emails print to backend console (console backend)
 - Default DB is SQLite
 - If patient doesn’t see doctors: make sure doctor is approved and has availability
+- New specialties stay hidden until an admin approves them
 
 Troubleshooting
 - CORS: backend must be running (http://localhost:8000)

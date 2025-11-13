@@ -1,3 +1,4 @@
+from django.db import models
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -65,7 +66,24 @@ class UserViewSet(viewsets.ModelViewSet):
 class SpecialtyViewSet(viewsets.ModelViewSet):
     queryset = Specialty.objects.all()
     serializer_class = SpecialtySerializer
-    permission_classes = [IsAdmin]
+
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            return [AllowAny()]
+        if self.action == 'create':
+            return [IsAuthenticated()]
+        return [IsAdmin()]
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated and getattr(user, 'role', None) == 'admin':
+            return Specialty.objects.all()
+        return Specialty.objects.filter(is_approved=True)
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        is_admin = getattr(user, 'role', None) == 'admin'
+        serializer.save(is_approved=is_admin)
 
 
 class DoctorViewSet(viewsets.ModelViewSet):
@@ -78,7 +96,11 @@ class DoctorViewSet(viewsets.ModelViewSet):
             return Doctor.objects.all()
         elif self.request.user.role == 'doctor':
             return Doctor.objects.filter(user=self.request.user)
-        return Doctor.objects.filter(user__is_approved=True)
+        return Doctor.objects.filter(
+            user__is_approved=True
+        ).filter(
+            models.Q(specialty__isnull=True) | models.Q(specialty__is_approved=True)
+        )
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
